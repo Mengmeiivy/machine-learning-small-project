@@ -1,3 +1,2 @@
-# machine-learning-small-projects
+
 Here lists a series of small Machine Learning projets I did.
-# who
