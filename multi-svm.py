@@ -5,7 +5,6 @@ from sklearn.svm import SVC
 from sklearn.multiclass import OneVsRestClassifier
 import matplotlib.pyplot as plt
 
-
 #transform text files into feature vectors and normalize the feature vectors 
 training_file = 'mnist_train.txt'
 test_file = 'mnist_test.txt'
@@ -69,8 +68,6 @@ def multi_svm_test(weight_vector, test_digit, test_feature):
     error_rate = error_sum / len(test_digit)
     return error_rate
 
-
-
 lambda1 = 2**(-3)
 
 """
@@ -103,9 +100,6 @@ weight_vector = multi_svm_train(training_digit, training_feature, lambda1)
 error_rate = multi_svm_test(weight_vector, test_digit, test_feature)
 print ('The test error rate is', error_rate)
 """
-
-
-
 
 """
 #compute the test error with parameters at their default settings 
