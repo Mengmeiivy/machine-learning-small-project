@@ -23,7 +23,7 @@ def randIndex(truth, predicted):
 			count += 1
 	return (agree_same+disagree_same)/float(count)
 
-# Code Sample
+
 import scipy.cluster.hierarchy as sch
 from sklearn.cluster import KMeans
 import numpy as np
@@ -46,16 +46,13 @@ resultingClusters = sch.fcluster(hClsMat,t= 3, criterion = 'distance')
 print (resultingClusters)
 """
 
-# Your code starts from here ....
 
 # 1. 
 # Scaling min max 
-# STUDENT CODE TODO
 file1 = 'dataCereal-grains-pasta.txt'
 file2 = 'dataFinfish-shellfish.txt'
 file3 = 'dataVegetables.txt'
 file4 = 'dataFats-oils.txt'
-
 
 """
 # find number of features: 150
@@ -84,8 +81,6 @@ with open (file4, 'r') as file4:
 		print (row)
 print ('The number of data is', num_of_data)
 """
-
-
 feature = np.zeros((1496, 150))
 truth = np.zeros((1496))
 predict = np.zeros((1496))
@@ -151,30 +146,23 @@ for i in range (1496):
 		if (max_j[j] != 0):
 			feature[i][j] = (feature[i][j] - min_j[j]) / (max_j[j] - min_j[j])
 
-
 # 2. 
 # K-means http://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html
-# STUDENT CODE TODO
 
 clf = KMeans(n_clusters=4)
 
-
 # 3.
 # Compute Rand Index
-# STUDENT CODE TODO
-# 0.5286
 truth_random = np.random.permutation(truth)
 rand_index_random = randIndex(truth, truth_random)
 print ('Rand Index for a random permutation of labels is', rand_index_random)
-# 0.8355
+
 predict = clf.fit_predict(feature)
 rand_index_kmean = randIndex(truth, predict)
 print ('Rand Index for K-mean labels is', rand_index_kmean) 
 
-
 # 4.
 # Examining K-mean objective
-# STUDENT CODE TODO
 
 objective = []
 rand_index_list = []
@@ -192,7 +180,6 @@ print ('Objective function  Rand Index')
 for i in range (len(objective)):
 	print (objective[i], '     ', rand_index_list[i])
 
-
 """
 The distinctive values of the objective functions are: [789.38823917864681, 660.02881146305879, 805.45680053657293, 805.38798314407813, 804.12472222302642]
 The minimum objective function is: 660.028811463
@@ -208,7 +195,7 @@ Objective function  Rand Index
 # Dendogram plot
 # Dendogram - http://docs.scipy.org/doc/scipy-0.13.0/reference/generated/scipy.cluster.hierarchy.dendrogram.html
 # Linkage - http://docs.scipy.org/doc/scipy-0.13.0/reference/generated/scipy.cluster.hierarchy.linkage.html
-# STUDENT CODE TODO
+
 short_feature = np.zeros((120, 150))
 short_truth = np.zeros((120))
 index_short = 0
@@ -239,11 +226,10 @@ hClsMat = sch.linkage(short_feature, method='complete')
 sch.dendrogram(hClsMat, labels = short_truth, leaf_rotation = 45)
 plt.show()
 
-
 # 6. 
 # Hierarchical clustering
 # SciPy's Cluster - http://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.fcluster.html#scipy.cluster.hierarchy.fcluster
-# STUDENT CODE TODO
+
 hClsMat2 = sch.linkage(feature, method='complete')
 resultingClusters = sch.fcluster(hClsMat2, t= 3.8, criterion = 'distance')
 print ('The Rand Index for agglomerative clustering is', randIndex(truth, resultingClusters)) # 0.5306
@@ -253,20 +239,9 @@ resultingClusters = sch.fcluster(hClsMat2, t = 2, criterion = 'distance')
 print ('The Rand Index for agglomerative clustering is', randIndex(truth, resultingClusters))
 print ('The number of clusters is', max(resultingClusters)) #36
 
-
-"""
-t     Rand Index
-3	  0.5959
-2.5   0.7949
-2     0.8371
-1.75  0.8355
-1.5   0.8025 
-1 	  0.7856
-"""
-
 # 7. 
 # K-means for Sub-cluster 
-# STUDENT CODE TODO
+
 for k in 5, 10, 25, 50, 75:
 	print ('For k =', k)
 	clf = KMeans(n_clusters = k)
@@ -366,27 +341,6 @@ RICE NOODLES,CKD
 RICE,WHITE,SHORT-GRAIN,CKD
 
 """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
