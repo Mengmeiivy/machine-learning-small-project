@@ -100,7 +100,6 @@ with open (test_file, 'r') as process_file:
                     spam_vector_test[email_num] = -1
         email_num += 1
 
-
 #the pegasos svm train algorithm
 lambda1 = 2**(-8)
 objective_value = []
