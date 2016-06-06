@@ -86,7 +86,6 @@ for i in range (training_num):
         if (training_feature[i][j] == '?'):
             training_feature[i][j] = sub_list[j]
 
-
 # build the feature and label vectors for test file
 with open (test_file, 'r') as test_file:
     index = 0
@@ -105,7 +104,6 @@ for i in range (test_num):
      for j in range (12):
         if (test_feature[i][j] == '?'):
             test_feature[i][j] = sub_list[j]
-
 
 # create a new feature list
 new_feature = []
@@ -173,9 +171,7 @@ cut_point = int (training_num*0.7)
 train_feature, validation_feature = new_training_feature[:cut_point,:], new_training_feature[cut_point:,:]
 train_label, validation_label = training_label[:cut_point], training_label[cut_point:]
 
-
 # scikit learn
-
 # find the best max_depth
 depth_train_accuracy = []
 depth_validation_accuracy = []
@@ -186,7 +182,6 @@ for i in range (30):
     depth_validation_accuracy.append(clf.score(validation_feature, validation_label))
 best_max_depth = depth_validation_accuracy.index(max(depth_validation_accuracy)) + 1
 
-
 # find the best min_samples_leaf
 leaf_train_accuracy = []
 leaf_validation_accuracy = []
@@ -196,7 +191,6 @@ for j in range (50):
     leaf_train_accuracy.append(clf.score(train_feature, train_label))
     leaf_validation_accuracy.append(clf.score(validation_feature, validation_label))
 best_leaf = leaf_validation_accuracy.index(max(leaf_validation_accuracy)) + 1
-
 
 # draw the top 3 levels of the tree
 print ('The best max_depth and min_samples_leaf are', best_max_depth, best_leaf) #10, 43
@@ -210,7 +204,6 @@ with open("tree.dot", 'w') as f:
 clf = tree.DecisionTreeClassifier(max_depth = best_max_depth, min_samples_leaf = best_leaf)
 clf.fit(new_training_feature, training_label)
 print ('Accuracy on test data is', clf.score(new_test_feature, test_label)) #0.82169399914
-
 
 # plots 
 max_depth = np.array(range(1,31))
