@@ -7,5 +7,5 @@ logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=lo
 #load the model 
 model = gensim.models.ldamodel.LdaModel.load('lda_5.lda')
 
-# print all topics in the model 
+#print all topics in the model 
 model.print_topics(-1)
